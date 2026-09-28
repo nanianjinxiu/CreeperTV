@@ -1,7 +1,9 @@
 {
   "entity.creepertv.phanper": "Phanper",
+  "entity.creepertv.evoper": "Evoper",
 
   "item.creepertv.phanper_spawn_egg": "Phanper Spawn Egg",
+  "item.creepertv.evoper_spawn_egg": "Evoper Spawn Egg",
 
   "itemGroup.creepertv.creepertv_tab": "Creeper TV"
 }

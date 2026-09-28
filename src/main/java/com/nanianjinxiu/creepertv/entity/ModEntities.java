@@ -17,4 +17,10 @@ public class ModEntities {
                     .sized(0.9F, 0.5F)
                     .clientTrackingRange(10)
                     .build("creepertv:phanper"));
+    public static final RegistryObject<EntityType<Evoper>> EVOPER =
+            ENTITIES.register("evoper", () -> EntityType.Builder
+                    .of(Evoper::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.95F)
+                    .clientTrackingRange(10)
+                    .build("creepertv:evoper"));
 }

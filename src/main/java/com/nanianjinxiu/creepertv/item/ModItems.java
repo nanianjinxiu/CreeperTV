@@ -14,9 +14,16 @@ public class ModItems {
 
     public static final RegistryObject<ForgeSpawnEggItem> PHANPER_SPAWN_EGG =
             ITEMS.register("phanper_spawn_egg", () -> new ForgeSpawnEggItem(
-                    ModEntities.PHANPER,   // 关联的实体类型
-                    0x2D2D2D,              // 底色（深灰色）
-                    0x4CAF50,              // 斑点色（绿色）
+                    ModEntities.PHANPER,
+                    0x2D2D2D,
+                    0x4CAF50,
+                    new Item.Properties()
+            ));
+    public static final RegistryObject<ForgeSpawnEggItem> EVOPER_SPAWN_EGG =
+            ITEMS.register("evoper_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.EVOPER,
+                    0x4A7A3A,
+                    0x1A1A2E,
                     new Item.Properties()
             ));
 }
