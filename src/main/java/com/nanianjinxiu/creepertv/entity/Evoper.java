@@ -4,6 +4,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -38,7 +39,8 @@ public class Evoper extends Evoker {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new SummonSilverfishGoal());
+//        this.goalSelector.addGoal(2, new SummonSilverfishGoal());
+        this.goalSelector.addGoal(3, new ConjureCreeperFangsGoal());
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 0.6D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Mob.class, 8.0F));
@@ -56,7 +58,7 @@ public class Evoper extends Evoker {
         return super.getArmPose();
     }
 
-    //继承原版施法基类
+    // 召唤蠹虫
     class SummonSilverfishGoal extends SpellcasterIllager.SpellcasterUseSpellGoal {
 
         @Override
@@ -78,28 +80,77 @@ public class Evoper extends Evoker {
         }
 
         @Override
-        protected int getCastWarmupTime() {
-            return 100;
-        }
+        protected int getCastWarmupTime() { return 100; }
 
         @Override
-        protected int getCastingTime() {
-            return 20;
-        }
+        protected int getCastingTime() { return 20; }
 
         @Override
-        protected int getCastingInterval() {
-            return 340;
-        }
+        protected int getCastingInterval() { return 340; }
 
         @Override
-        protected SoundEvent getSpellPrepareSound() {
-            return SoundEvents.EVOKER_PREPARE_SUMMON;
-        }
+        protected SoundEvent getSpellPrepareSound() { return SoundEvents.EVOKER_PREPARE_SUMMON; }
 
         @Override
         protected SpellcasterIllager.IllagerSpell getSpell() {
             return SpellcasterIllager.IllagerSpell.SUMMON_VEX;
+        }
+    }
+
+    // 召唤苦力怕尖牙
+    class ConjureCreeperFangsGoal extends SpellcasterIllager.SpellcasterUseSpellGoal {
+
+        @Override
+        protected void performSpellCasting() {
+            Evoper evoper = Evoper.this;
+            LivingEntity target = evoper.getTarget();
+            if (target == null) return;
+
+            double startX = evoper.getX();
+            double startY = evoper.getY();
+            double startZ = evoper.getZ();
+            float yaw = evoper.getYRot();
+
+            // 施法者 → 目标 的方向
+            double dx = target.getX() - startX;
+            double dz = target.getZ() - startZ;
+            double len = Math.sqrt(dx * dx + dz * dz);
+            if (len < 0.1D) return;
+            double nx = dx / len;
+            double nz = dz / len;
+
+            // 从施法者前方 1 格开始，向目标方向排 13 根，间距 1 格
+            int delay = 0;
+            for (int i = 0; i < 13; i++) {
+                double offset = 1.0D + i * 1.0D;
+                double x = startX + nx * offset;
+                double z = startZ + nz * offset;
+                spawnFang(x, startY, z, yaw, delay);
+                delay += 2;
+            }
+        }
+
+        private void spawnFang(double x, double y, double z, float yaw, int delay) {
+            if (!(Evoper.this.level() instanceof ServerLevel serverLevel)) return;
+            CreeperFangEntity fang = new CreeperFangEntity(serverLevel, x, y, z, yaw, delay);
+            serverLevel.addFreshEntity(fang);
+        }
+
+        @Override
+        protected int getCastWarmupTime() { return 100; }
+
+        @Override
+        protected int getCastingTime() { return 20; }
+
+        @Override
+        protected int getCastingInterval() { return 340; }
+
+        @Override
+        protected SoundEvent getSpellPrepareSound() { return SoundEvents.EVOKER_PREPARE_ATTACK; }
+
+        @Override
+        protected SpellcasterIllager.IllagerSpell getSpell() {
+            return SpellcasterIllager.IllagerSpell.FANGS;
         }
     }
 }

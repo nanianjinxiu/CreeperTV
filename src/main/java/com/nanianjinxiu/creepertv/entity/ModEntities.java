@@ -23,4 +23,10 @@ public class ModEntities {
                     .sized(0.6F, 1.95F)
                     .clientTrackingRange(10)
                     .build("creepertv:evoper"));
+    public static final RegistryObject<EntityType<CreeperFangEntity>> CREEPER_FANG =
+            ENTITIES.register("creeper_fang", () -> EntityType.Builder
+                    .<CreeperFangEntity>of(CreeperFangEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.8F)
+                    .clientTrackingRange(6)
+                    .build("creepertv:creeper_fang"));
 }

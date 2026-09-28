@@ -13,6 +13,7 @@ public class ClientEvents {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.PHANPER.get(), PhanperRenderer::new);
         event.registerEntityRenderer(ModEntities.EVOPER.get(), EvoperRenderer::new);
+        event.registerEntityRenderer(ModEntities.CREEPER_FANG.get(), CreeperFangRenderer::new);
     }
 
 
