@@ -11,6 +11,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Vex;
+import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
@@ -79,7 +81,7 @@ public class CreeperFangEntity extends Entity {
         List<LivingEntity> hits = this.level().getEntitiesOfClass(
                 LivingEntity.class,
                 this.getBoundingBox().inflate(0.5D),
-                e -> e.isAlive() && !(e instanceof Evoper)
+                e -> e.isAlive() && !(e instanceof Raider) && !(e instanceof Vex)
         );
 
         if (!hits.isEmpty()) {
