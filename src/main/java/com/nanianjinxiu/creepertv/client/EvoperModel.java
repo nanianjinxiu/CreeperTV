@@ -4,7 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.nanianjinxiu.creepertv.CreeperTV;
 import com.nanianjinxiu.creepertv.entity.Evoper;
+import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -12,9 +14,10 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.monster.AbstractIllager;
 
-public class EvoperModel<T extends Entity> extends EntityModel<T> {
+public class EvoperModel<T extends Entity> extends EntityModel<T> implements ArmedModel, HeadedModel {
 
 	public static final ModelLayerLocation LAYER_LOCATION =
 			new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(CreeperTV.MODID, "evoper"), "main");
@@ -87,7 +90,7 @@ public class EvoperModel<T extends Entity> extends EntityModel<T> {
 		this.leg1.yRot = 0.0F;
 		this.leg1.zRot = 0.0F;
 
-		// 手臂姿态控制（严格对照原版 IllagerModel）
+		// 手臂姿态控制
 		if (entity instanceof Evoper evoper) {
 			AbstractIllager.IllagerArmPose armPose = evoper.getArmPose();
 
@@ -104,7 +107,6 @@ public class EvoperModel<T extends Entity> extends EntityModel<T> {
 				this.LeftArm.yRot = 0.0F;
 			}
 
-			// 只有 CROSSED 姿态才显示 arms，其他姿态显示自然手臂
 			boolean crossed = armPose == AbstractIllager.IllagerArmPose.CROSSED;
 			this.arms.visible = crossed;
 			this.RightArm.visible = !crossed;
@@ -115,5 +117,16 @@ public class EvoperModel<T extends Entity> extends EntityModel<T> {
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void translateToHand(HumanoidArm side, PoseStack poseStack) {
+		ModelPart arm = side == HumanoidArm.LEFT ? this.LeftArm : this.RightArm;
+		arm.translateAndRotate(poseStack);
+	}
+
+	@Override
+	public ModelPart getHead() {
+		return this.Head;
 	}
 }

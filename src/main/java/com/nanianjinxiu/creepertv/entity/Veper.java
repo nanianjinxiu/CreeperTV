@@ -1,20 +1,18 @@
 package com.nanianjinxiu.creepertv.entity;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Vex;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class Veper extends Vex {
@@ -47,8 +45,8 @@ public class Veper extends Vex {
         if (this.level().isClientSide) return;
         LivingEntity target = this.getTarget();
         if (target != null) {
-            if (this.closerThan(target, 2.0D)) swellDir = true;
-            else if (!this.closerThan(target, 2.0D)) swellDir = false;
+            if (this.closerThan(target, 3.0D)) swellDir = true;
+            else if (!this.closerThan(target, 3.0D)) swellDir = false;
         }
         int swell = this.entityData.get(DATA_SWELL);
         if (swellDir) swell++;
@@ -58,7 +56,7 @@ public class Veper extends Vex {
             this.level().explode(this, this.getX(), this.getY(), this.getZ(), 2.0F, Level.ExplosionInteraction.MOB);
             this.discard();
         }
-        if (swell == 1) {  // swell 刚从 0 变成 1，说明刚开始膨胀
+        if (swell == 1) {
             this.level().playSound(
                     null,
                     this.getX(), this.getY(), this.getZ(),
@@ -71,11 +69,7 @@ public class Veper extends Vex {
     }
 
     @Override
-    protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
-        super.dropCustomDeathLoot(source, looting, recentlyHit);
-
-        int gunpowderCount = 1 + this.random.nextInt(2) + looting;
-        this.spawnAtLocation(new ItemStack(Items.GUNPOWDER, gunpowderCount));
+    protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {
     }
 
     public float getSwelling(float partialTicks) {
