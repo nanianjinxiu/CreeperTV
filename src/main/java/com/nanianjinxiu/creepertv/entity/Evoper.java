@@ -3,6 +3,7 @@ package com.nanianjinxiu.creepertv.entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -20,6 +21,8 @@ import net.minecraft.world.entity.monster.SpellcasterIllager;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raider;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class Evoper extends Evoker {
@@ -39,7 +42,7 @@ public class Evoper extends Evoker {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-//        this.goalSelector.addGoal(2, new SummonSilverfishGoal());
+        this.goalSelector.addGoal(2, new SummonSilverfishGoal());
         this.goalSelector.addGoal(3, new ConjureCreeperFangsGoal());
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 0.6D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
@@ -58,23 +61,32 @@ public class Evoper extends Evoker {
         return super.getArmPose();
     }
 
-    // 召唤蠹虫
-    class SummonSilverfishGoal extends SpellcasterIllager.SpellcasterUseSpellGoal {
+    @Override
+    protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
+        this.spawnAtLocation(new ItemStack(Items.TOTEM_OF_UNDYING));
+        int gunpowderCount = 3 + this.random.nextInt(4) + looting;
+        this.spawnAtLocation(new ItemStack(Items.GUNPOWDER, gunpowderCount));
+        int membraneCount = this.random.nextInt(3) + looting;
+        this.spawnAtLocation(new ItemStack(Items.PHANTOM_MEMBRANE, membraneCount));
+    }
 
+    //召唤怕鬼
+    class SummonSilverfishGoal extends SpellcasterIllager.SpellcasterUseSpellGoal {
         @Override
         protected void performSpellCasting() {
             Evoper evoper = Evoper.this;
             if (!(evoper.level() instanceof ServerLevel serverLevel)) return;
-
             int count = 2 + evoper.getRandom().nextInt(3);
             for (int i = 0; i < count; i++) {
-                Silverfish silverfish = EntityType.SILVERFISH.create(serverLevel);
-                if (silverfish != null) {
+                Veper veper = ModEntities.VEPER.get().create(serverLevel);
+                if (veper != null) {
                     double x = evoper.getX() + (evoper.getRandom().nextDouble() - 0.5D) * 4.0D;
-                    double y = evoper.getY();
+                    double y = evoper.getY() + 1.0D;
                     double z = evoper.getZ() + (evoper.getRandom().nextDouble() - 0.5D) * 4.0D;
-                    silverfish.moveTo(x, y, z, evoper.getYRot(), 0.0F);
-                    serverLevel.addFreshEntity(silverfish);
+                    veper.moveTo(x, y, z, evoper.getYRot(), 0.0F);
+                    veper.setOwner(evoper);
+                    veper.setBoundOrigin(evoper.blockPosition());
+                    serverLevel.addFreshEntity(veper);
                 }
             }
         }
@@ -153,4 +165,5 @@ public class Evoper extends Evoker {
             return SpellcasterIllager.IllagerSpell.FANGS;
         }
     }
+
 }

@@ -26,4 +26,11 @@ public class ModItems {
                     0x1A1A2E,
                     new Item.Properties()
             ));
+    public static final RegistryObject<ForgeSpawnEggItem> VEPER_SPAWN_EGG =
+            ITEMS.register("veper_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.VEPER,
+                    0x5B6E8C,
+                    0x4CAF50,
+                    new Item.Properties()
+            ));
 }

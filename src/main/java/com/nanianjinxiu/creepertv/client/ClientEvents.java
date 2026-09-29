@@ -14,6 +14,7 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntities.PHANPER.get(), PhanperRenderer::new);
         event.registerEntityRenderer(ModEntities.EVOPER.get(), EvoperRenderer::new);
         event.registerEntityRenderer(ModEntities.CREEPER_FANG.get(), CreeperFangRenderer::new);
+        event.registerEntityRenderer(ModEntities.VEPER.get(), VeperRenderer::new);
     }
 
 
@@ -21,5 +22,6 @@ public class ClientEvents {
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(PhanperModel.LAYER_LOCATION, PhanperModel::createBodyLayer);
         event.registerLayerDefinition(EvoperModel.LAYER_LOCATION, EvoperModel::createBodyLayer);
+        event.registerLayerDefinition(VeperModel.LAYER_LOCATION, VeperModel::createBodyLayer);
     }
 }

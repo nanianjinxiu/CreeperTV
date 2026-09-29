@@ -1,9 +1,11 @@
 {
   "entity.creepertv.phanper": "幻怕",
   "entity.creepertv.evoper": "唤怕者",
+  "entity.creepertv.veper":"怕鬼",
 
   "item.creepertv.phanper_spawn_egg": "幻怕刷怪蛋",
   "item.creepertv.evoper_spawn_egg": "唤怕者刷怪蛋",
+  "item.creepertv.veper_spawn_egg":"怕鬼刷怪蛋",
 
   "itemGroup.creepertv.creepertv_tab": "苦力怕TV"
 }
