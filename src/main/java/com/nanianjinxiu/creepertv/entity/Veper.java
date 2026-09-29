@@ -47,15 +47,15 @@ public class Veper extends Vex {
         if (this.level().isClientSide) return;
         LivingEntity target = this.getTarget();
         if (target != null) {
-            if (this.closerThan(target, 6.0D)) swellDir = true;
-            else if (!this.closerThan(target, 6.0D)) swellDir = false;
+            if (this.closerThan(target, 2.0D)) swellDir = true;
+            else if (!this.closerThan(target, 2.0D)) swellDir = false;
         }
         int swell = this.entityData.get(DATA_SWELL);
         if (swellDir) swell++;
         else if (!swellDir && swell > 0) swell--;
         this.entityData.set(DATA_SWELL, swell);
         if (swell >= MAX_SWELL) {
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, Level.ExplosionInteraction.MOB);
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 2.0F, Level.ExplosionInteraction.MOB);
             this.discard();
         }
         if (swell == 1) {  // swell 刚从 0 变成 1，说明刚开始膨胀
