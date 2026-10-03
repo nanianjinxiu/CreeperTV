@@ -2,7 +2,8 @@ package com.nanianjinxiu.creepertv.spawnevents;
 
 import com.nanianjinxiu.creepertv.CreeperTV;
 import com.nanianjinxiu.creepertv.entity.ModEntities;
-import com.nanianjinxiu.creepertv.entity.Phanper;
+import com.nanianjinxiu.creepertv.entity.animal.Phanper;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Phantom;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
@@ -21,8 +22,10 @@ public class PhantomSpawnEvents {
             if (Math.random() < 0.1F) {
                 event.setSpawnCancelled(true);
                 Phanper phanper = ModEntities.PHANPER.get().create(event.getLevel().getLevel());
+                Entity original = event.getEntity();
                 if (phanper != null) {
-                    phanper.moveTo(event.getX(), event.getY(), event.getZ(), 0.0F, 0.0F);
+                    phanper.moveTo(original.getX(), original.getY(), original.getZ(),
+                            original.getYRot(), original.getXRot());
                     event.getLevel().getLevel().addFreshEntity(phanper);
                 }
             }

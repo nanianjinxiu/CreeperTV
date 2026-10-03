@@ -1,7 +1,12 @@
 package com.nanianjinxiu.creepertv.client;
 
 import com.nanianjinxiu.creepertv.CreeperTV;
+import com.nanianjinxiu.creepertv.client.model.EvoperModel;
+import com.nanianjinxiu.creepertv.client.model.PhanperModel;
+import com.nanianjinxiu.creepertv.client.model.VeperModel;
+import com.nanianjinxiu.creepertv.client.renderer.*;
 import com.nanianjinxiu.creepertv.entity.ModEntities;
+import com.nanianjinxiu.creepertv.entity.animal.IronGolper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,6 +20,7 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntities.EVOPER.get(), EvoperRenderer::new);
         event.registerEntityRenderer(ModEntities.CREEPER_FANG.get(), CreeperFangRenderer::new);
         event.registerEntityRenderer(ModEntities.VEPER.get(), VeperRenderer::new);
+        event.registerEntityRenderer(ModEntities.IRON_GOLPER.get(), IronGolperRenderer::new);
     }
 
 

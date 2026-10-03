@@ -1,8 +1,9 @@
-package com.nanianjinxiu.creepertv.client;
+package com.nanianjinxiu.creepertv.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nanianjinxiu.creepertv.CreeperTV;
-import com.nanianjinxiu.creepertv.entity.Veper;
+import com.nanianjinxiu.creepertv.client.model.VeperModel;
+import com.nanianjinxiu.creepertv.entity.animal.Veper;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

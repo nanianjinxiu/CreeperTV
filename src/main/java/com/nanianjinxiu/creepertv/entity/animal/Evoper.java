@@ -1,10 +1,10 @@
-package com.nanianjinxiu.creepertv.entity;
+package com.nanianjinxiu.creepertv.entity.animal;
 
+import com.nanianjinxiu.creepertv.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -27,11 +27,8 @@ import net.minecraft.world.entity.monster.SpellcasterIllager;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raider;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class Evoper extends Evoker {
@@ -78,15 +75,6 @@ public class Evoper extends Evoker {
 
     public AbstractIllager.IllagerArmPose getArmPose() {
         return super.getArmPose();
-    }
-
-    @Override
-    protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
-        this.spawnAtLocation(new ItemStack(Items.TOTEM_OF_UNDYING));
-        int gunpowderCount = 3 + this.random.nextInt(4) + looting;
-        this.spawnAtLocation(new ItemStack(Items.GUNPOWDER, gunpowderCount));
-        int membraneCount = this.random.nextInt(3) + looting;
-        this.spawnAtLocation(new ItemStack(Items.EMERALD, membraneCount));
     }
 
     class EvoperCastingSpellGoal extends Goal {

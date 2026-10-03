@@ -23,6 +23,7 @@ public class ModTabs {
                         output.accept(ModItems.PHANPER_SPAWN_EGG.get());
                         output.accept(ModItems.EVOPER_SPAWN_EGG.get());
                         output.accept(ModItems.VEPER_SPAWN_EGG.get());
+                        output.accept(ModItems.IRON_GOLPER_SPAWN_EGG.get());
                     })
                     .build());
 }

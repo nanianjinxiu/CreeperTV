@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.nanianjinxiu.creepertv.aicode.aivillagerboomer",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "creepertv.refmap.json",
+  "mixins": [
+    "VillagerBoomerMixin",
+    "VillagerPanicTriggerMixin"
+  ],
+  "client": [
+    "EntityEventMixin",
+    "VillagerRendererMixin",
+    "LivingEntityRendererAccessor"
+  ],
+  "minVersion": "0.8"
+}
