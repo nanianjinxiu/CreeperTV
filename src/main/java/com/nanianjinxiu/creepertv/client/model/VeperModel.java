@@ -1,4 +1,4 @@
-package com.nanianjinxiu.creepertv.client;// Made with Blockbench 5.2.1
+package com.nanianjinxiu.creepertv.client.model;// Made with Blockbench 5.2.1
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 

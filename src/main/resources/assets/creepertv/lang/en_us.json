@@ -2,10 +2,12 @@
   "entity.creepertv.phanper": "Phanper",
   "entity.creepertv.evoper": "Evoper",
   "entity.creepertv.veper": "Veper",
+  "entity.creepertv.iron_golper": "Iron Golper",
 
   "item.creepertv.phanper_spawn_egg": "Phanper Spawn Egg",
   "item.creepertv.evoper_spawn_egg": "Evoper Spawn Egg",
   "item.creepertv.veper_spawn_egg": "Veper Spawn Egg",
+  "item.creepertv.iron_golper_spawn_egg": "Iron Golper Spawn Egg",
 
   "itemGroup.creepertv.creepertv_tab": "Creeper TV"
 }

@@ -33,4 +33,11 @@ public class ModItems {
                     0x4CAF50,
                     new Item.Properties()
             ));
+    public static final RegistryObject<Item> IRON_GOLPER_SPAWN_EGG =
+            ITEMS.register("iron_golper_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.IRON_GOLPER,
+                    0xDBDBDB,  // 主色
+                    0x4A4A4A,  // 副色
+                    new Item.Properties()
+            ));
 }

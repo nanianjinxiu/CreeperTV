@@ -1,8 +1,8 @@
-package com.nanianjinxiu.creepertv.client;
+package com.nanianjinxiu.creepertv.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.nanianjinxiu.creepertv.entity.CreeperFangEntity;
+import com.nanianjinxiu.creepertv.entity.animal.CreeperFangEntity;
 import net.minecraft.client.model.CreeperModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;

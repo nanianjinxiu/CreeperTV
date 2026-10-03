@@ -1,5 +1,6 @@
-package com.nanianjinxiu.creepertv.entity;
+package com.nanianjinxiu.creepertv.entity.animal;
 
+import com.nanianjinxiu.creepertv.entity.ModEntities;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;

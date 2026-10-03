@@ -1,6 +1,7 @@
 package com.nanianjinxiu.creepertv.entity;
 
 import com.nanianjinxiu.creepertv.CreeperTV;
+import com.nanianjinxiu.creepertv.entity.animal.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
@@ -35,4 +36,10 @@ public class ModEntities {
                     .sized(0.4F, 0.8F)
                     .clientTrackingRange(8)
                     .build("creepertv:veper"));
+    public static final RegistryObject<EntityType<IronGolper>> IRON_GOLPER =
+            ENTITIES.register("iron_golper", () -> EntityType.Builder
+                    .<IronGolper>of(IronGolper::new, MobCategory.MISC)
+                    .sized(1.4F, 2.7F)
+                    .clientTrackingRange(10)
+                    .build("creepertv:iron_golper"));
 }

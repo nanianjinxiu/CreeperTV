@@ -1,8 +1,9 @@
 package com.nanianjinxiu.creepertv.spawnevents;
 
 import com.nanianjinxiu.creepertv.CreeperTV;
-import com.nanianjinxiu.creepertv.entity.Evoper;
+import com.nanianjinxiu.creepertv.entity.animal.Evoper;
 import com.nanianjinxiu.creepertv.entity.ModEntities;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Evoker;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
@@ -20,8 +21,10 @@ public class EvoperSpawnEvents {
             if (Math.random() < 0.05F) {
                 event.setSpawnCancelled(true);
                 Evoper evoper = ModEntities.EVOPER.get().create(event.getLevel().getLevel());
+                Entity original = event.getEntity();
                 if (evoper != null) {
-                    evoper.moveTo(event.getX(), event.getY(), event.getZ(), 0.0F, 0.0F);
+                    evoper.moveTo(original.getX(), original.getY(), original.getZ(),
+                            original.getYRot(), original.getXRot());
                     event.getLevel().getLevel().addFreshEntity(evoper);
                 }
             }

@@ -1,6 +1,6 @@
 package com.nanianjinxiu.creepertv;
 import com.nanianjinxiu.creepertv.entity.ModEntities;
-import com.nanianjinxiu.creepertv.entity.Phanper;
+import com.nanianjinxiu.creepertv.entity.animal.Phanper;
 import com.nanianjinxiu.creepertv.item.ModItems;
 import com.nanianjinxiu.creepertv.tab.ModTabs;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -23,9 +23,9 @@ public class CreeperTV
         //物品注册
         ModItems.ITEMS.register(modEventBus);
         //实体注册
-        ModTabs.TABS.register(modEventBus);
-        //创造模式物品栏注册
         ModEntities.ENTITIES.register(modEventBus);
+        //创造模式物品栏注册
+        ModTabs.TABS.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreative);
     }
@@ -36,10 +36,5 @@ public class CreeperTV
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-    }
-
-    @SubscribeEvent
-    public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.PHANPER.get(), Phanper.createAttributes().build());
     }
 }
