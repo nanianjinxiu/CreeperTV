@@ -2,6 +2,7 @@ package com.nanianjinxiu.creepertv.entity.ai.goal;
 
 import java.util.EnumSet;
 import com.nanianjinxiu.creepertv.entity.animal.IronGolper;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -86,6 +87,14 @@ public class OfferTNTGoal extends Goal {
     @Override
     public void tick() {
         this.golem.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
+
+        // 身体朝向也转过去
+        double dx = this.target.getX() - this.golem.getX();
+        double dz = this.target.getZ() - this.golem.getZ();
+        float targetYaw = (float)(Mth.atan2(dz, dx) * (180.0 / Math.PI)) - 90.0F;
+        this.golem.setYRot(targetYaw);
+        this.golem.yBodyRot = targetYaw;
+        this.golem.yHeadRot = targetYaw;
 
         if (this.golem.distanceToSqr(this.target) > 4.0D) {
             if (this.tick % 10 == 0) {

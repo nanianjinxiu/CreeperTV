@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 public class Phanper extends net.minecraft.world.entity.monster.Phantom {
     private static final EntityDataAccessor<Integer> DATA_SWELL =
             SynchedEntityData.defineId(Phanper.class, EntityDataSerializers.INT);
-    private final int MAX_SWELL = 30;
+    private final int MAX_SWELL = 25;
     boolean swellDir = false;
 
     public Phanper(EntityType<? extends Phantom> pEntityType, Level pLevel) {
@@ -69,21 +69,23 @@ public class Phanper extends net.minecraft.world.entity.monster.Phantom {
         super.tick();
         if (this.level().isClientSide) return;
         LivingEntity target = this.getTarget();
+        double speed = this.getDeltaMovement().length();
         // 判定是否安拉
         if (target != null) {
             boolean swooping = this.isSwooping();
-            if (swooping && this.closerThan(target, 6.0D)) swellDir = true;
+            if (swooping && this.closerThan(target, 4.0D)) swellDir = true;
             else if (!swooping && !this.closerThan(target, 2.0D)) swellDir = false;
         }
         int swell = this.entityData.get(DATA_SWELL);
-        if (swellDir) swell++;
+        if (swellDir && !(speed > 0.4)) swell++;
+        else if (swellDir && speed > 0.4) swell+=2;
         else if (!swellDir && swell > 0) swell--;
         this.entityData.set(DATA_SWELL, swell);
         if (swell >= MAX_SWELL) {
             this.level().explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, Level.ExplosionInteraction.MOB);
             this.discard();
         }
-        if (swell == 1) {  // swell 刚从 0 变成 1，说明刚开始膨胀
+        if (swell == 1) {
             this.level().playSound(
                     null,
                     this.getX(), this.getY(), this.getZ(),
