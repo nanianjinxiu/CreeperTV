@@ -56,7 +56,7 @@ public class VillagerHash {
                             new ResourceLocation("minecraft", "desert")))
                     .orElse(false);
 
-            float threshold = isDesert ? 1F : 0.05F;
+            float threshold = isDesert ? 0.2F : 0.05F;
 
             return roll < threshold;
         }
