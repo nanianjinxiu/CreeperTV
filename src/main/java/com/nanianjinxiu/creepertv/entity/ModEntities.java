@@ -32,14 +32,20 @@ public class ModEntities {
                     .build("creepertv:creeper_fang"));
     public static final RegistryObject<EntityType<Veper>> VEPER =
             ENTITIES.register("veper", () -> EntityType.Builder
-                    .<Veper>of(Veper::new, MobCategory.MONSTER)
+                    .of(Veper::new, MobCategory.MONSTER)
                     .sized(0.4F, 0.8F)
                     .clientTrackingRange(8)
                     .build("creepertv:veper"));
     public static final RegistryObject<EntityType<IronGolper>> IRON_GOLPER =
             ENTITIES.register("iron_golper", () -> EntityType.Builder
-                    .<IronGolper>of(IronGolper::new, MobCategory.MISC)
+                    .of(IronGolper::new, MobCategory.MISC)
                     .sized(1.4F, 2.7F)
                     .clientTrackingRange(10)
                     .build("creepertv:iron_golper"));
+    public static final RegistryObject<EntityType<EnperMan>> ENPER_MAN =
+            ENTITIES.register("enper_man", () -> EntityType.Builder
+                    .of(EnperMan::new, MobCategory.MONSTER)
+                    .sized(0.6F, 2.9F)
+                    .clientTrackingRange(8)
+                    .build("creepertv:enper_man"));
 }

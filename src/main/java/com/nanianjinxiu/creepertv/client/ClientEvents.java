@@ -19,8 +19,8 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntities.CREEPER_FANG.get(), CreeperFangRenderer::new);
         event.registerEntityRenderer(ModEntities.VEPER.get(), VeperRenderer::new);
         event.registerEntityRenderer(ModEntities.IRON_GOLPER.get(), IronGolperRenderer::new);
+        event.registerEntityRenderer(ModEntities.ENPER_MAN.get(), EnpermanRenderer::new);
     }
-
 
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {

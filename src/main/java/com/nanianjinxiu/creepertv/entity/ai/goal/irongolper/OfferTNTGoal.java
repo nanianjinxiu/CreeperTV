@@ -1,4 +1,4 @@
-package com.nanianjinxiu.creepertv.entity.ai.goal;
+package com.nanianjinxiu.creepertv.entity.ai.goal.irongolper;
 
 import java.util.EnumSet;
 import com.nanianjinxiu.creepertv.entity.animal.IronGolper;

@@ -3,11 +3,13 @@
   "entity.creepertv.evoper": "唤怕者",
   "entity.creepertv.veper":"怕鬼",
   "entity.creepertv.iron_golper": "傀儡怕",
+  "entity.creepertv.enper_man": "末怕人",
 
   "item.creepertv.phanper_spawn_egg": "幻怕刷怪蛋",
   "item.creepertv.evoper_spawn_egg": "唤怕者刷怪蛋",
   "item.creepertv.veper_spawn_egg":"怕鬼刷怪蛋",
   "item.creepertv.iron_golper_spawn_egg": "傀儡怕刷怪蛋",
+  "item.creepertv.enper_man_spawn_egg": "末怕人刷怪蛋",
 
   "itemGroup.creepertv.creepertv_tab": "苦力怕TV"
 }

@@ -1,6 +1,6 @@
 package com.nanianjinxiu.creepertv.entity.animal;
 
-import com.nanianjinxiu.creepertv.entity.ai.goal.OfferTNTGoal;
+import com.nanianjinxiu.creepertv.entity.ai.goal.irongolper.OfferTNTGoal;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
