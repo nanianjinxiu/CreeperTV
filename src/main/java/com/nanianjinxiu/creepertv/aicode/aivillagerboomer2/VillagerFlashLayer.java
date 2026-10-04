@@ -12,20 +12,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.Villager;
 
-import java.lang.reflect.Field;
-
 public class VillagerFlashLayer extends RenderLayer<Villager, VillagerModel<Villager>> {
     private static final ResourceLocation WHITE = new ResourceLocation("textures/misc/white.png");
-
-    private static final Field HAT_FIELD;
-    static {
-        try {
-            HAT_FIELD = VillagerModel.class.getDeclaredField("hat");
-            HAT_FIELD.setAccessible(true);
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException("找不到 VillagerModel.hat", e);
-        }
-    }
 
     public VillagerFlashLayer(RenderLayerParent<Villager, VillagerModel<Villager>> parent) {
         super(parent);
@@ -37,22 +25,14 @@ public class VillagerFlashLayer extends RenderLayer<Villager, VillagerModel<Vill
                        float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         if (!VillagerBoomerState.isFlashing(villager.getUUID())) return;
 
-        ModelPart hat;
-        boolean hatWasVisible = false;
-        try {
-            hat = (ModelPart) HAT_FIELD.get(this.getParentModel());
-            hatWasVisible = hat.visible;
-            hat.visible = false;
-        } catch (IllegalAccessException ignored) {
-            hat = null;
-        }
+        ModelPart hat = this.getParentModel().getHead().getChild("hat");
+        boolean hatWasVisible = hat.visible;
+        hat.visible = false;
 
         VertexConsumer consumer = buffer.getBuffer(RenderType.entityTranslucent(WHITE));
         this.getParentModel().renderToBuffer(poseStack, consumer, packedLight,
                 OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 0.7F);
 
-        if (hat != null) {
-            hat.visible = hatWasVisible;
-        }
+        hat.visible = hatWasVisible;
     }
 }
