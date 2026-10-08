@@ -2,7 +2,9 @@ package com.nanianjinxiu.creepertv.item;
 
 import com.nanianjinxiu.creepertv.CreeperTV;
 import com.nanianjinxiu.creepertv.entity.ModEntities;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.MinecartItem;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -46,5 +48,9 @@ public class ModItems {
                     0x161616,
                     0xDB3A2F,
                     new Item.Properties()
+            ));
+    public static final RegistryObject<Item> MINECART_WITH_TNT_ITEM =
+            ITEMS.register("minecart_with_tnt", () -> new MinecartWithTNTItem(
+                    new Item.Properties().stacksTo(1)
             ));
 }

@@ -1,4 +1,4 @@
-package com.nanianjinxiu.creepertv.aicode.aivillagerboomer2;
+package com.nanianjinxiu.creepertv.aicode.aivillagerboomer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

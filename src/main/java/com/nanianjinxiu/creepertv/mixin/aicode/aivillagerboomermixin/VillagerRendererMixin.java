@@ -1,6 +1,6 @@
-package com.nanianjinxiu.creepertv.aicode.aivillagerboomer;
+package com.nanianjinxiu.creepertv.mixin.aicode.aivillagerboomermixin;
 
-import com.nanianjinxiu.creepertv.aicode.aivillagerboomer2.VillagerFlashLayer;
+import com.nanianjinxiu.creepertv.aicode.aivillagerboomer.VillagerFlashLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.VillagerRenderer;

@@ -1,4 +1,4 @@
-package com.nanianjinxiu.creepertv.aicode.aivillagerboomer;
+package com.nanianjinxiu.creepertv.mixin.aicode.aivillagerboomermixin;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,33 +15,38 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Villager.class)
 public class VillagerBoomerMixin {
 
-    private static final String TAG = "creepertv:boomer";
+    private static final String NATURAL_TAG = "creepertv:natural_boomer";   // 天生标签
+    private static final String ACTIVE_TAG = "creepertv:boomer";            // 激活标签
     private static final String NBT_START = "BoomerStartTime";
     private static final String NBT_FUSE = "BoomerFuseEnd";
-    private static final int CHASE_TIME = 120;   // 6 秒
-    private static final int FUSE_TIME = 30;     // 引信 1.5 秒
+    private static final int CHASE_TIME = 120;
+    private static final int FUSE_TIME = 30;
 
     @Inject(method = "customServerAiStep", at = @At("HEAD"))
     private void onHead(CallbackInfo ci) {
         Villager self = (Villager) (Object) this;
 
+        // 被钟声影响
         if (self.getBrain().hasMemoryValue(MemoryModuleType.HEARD_BELL_TIME)) {
-            if (!self.getTags().contains(TAG)) {
-                self.addTag(TAG);
-                self.getPersistentData().putLong(NBT_START,
-                        self.level().getGameTime());
+            // 只有天生带标签的村民，才会被激活
+            if (self.getTags().contains(NATURAL_TAG)
+                    && !self.getTags().contains(ACTIVE_TAG)) {
+                self.addTag(ACTIVE_TAG);
+                self.getPersistentData().putLong(NBT_START, self.level().getGameTime());
                 self.getPersistentData().putLong(NBT_FUSE, 0L);
             }
         }
 
-        if (!self.getTags().contains(TAG)) return;
-        self.getBrain().eraseMemory(MemoryModuleType.HEARD_BELL_TIME);
+        // 清理钟声记忆，防止恐慌打断已激活的村民
+        if (self.getTags().contains(ACTIVE_TAG)) {
+            self.getBrain().eraseMemory(MemoryModuleType.HEARD_BELL_TIME);
+        }
     }
 
     @Inject(method = "customServerAiStep", at = @At("TAIL"))
     private void onTail(CallbackInfo ci) {
         Villager self = (Villager) (Object) this;
-        if (!self.getTags().contains(TAG)) return;
+        if (!self.getTags().contains(ACTIVE_TAG)) return;
 
         long gameTime = self.level().getGameTime();
         long startTime = self.getPersistentData().getLong(NBT_START);
@@ -56,22 +61,22 @@ public class VillagerBoomerMixin {
             if (remaining <= 0) {
                 self.level().explode(self, self.getX(), self.getY(), self.getZ(),
                         4.0F, Level.ExplosionInteraction.MOB);
-                self.removeTag(TAG);
+                self.removeTag(ACTIVE_TAG);
+                self.removeTag(NATURAL_TAG);
+                self.getPersistentData().remove(NBT_START);
+                self.getPersistentData().remove(NBT_FUSE);
                 self.discard();
                 return;
             }
 
-            // 引信期间继续追
             if (player != null) {
                 self.getBrain().setMemory(MemoryModuleType.WALK_TARGET,
                         new WalkTarget(player, 0.5F, 0));
             }
 
-            // 白闪
             if (remaining % 10 == 0) {
                 self.level().broadcastEntityEvent(self, (byte) 100);
             }
-            // 滋滋声
             if (remaining % 20 == 0) {
                 self.level().playSound(null, self.getX(), self.getY(), self.getZ(),
                         SoundEvents.CREEPER_PRIMED, SoundSource.HOSTILE, 0.6F, 1.5F);
@@ -79,9 +84,11 @@ public class VillagerBoomerMixin {
             return;
         }
 
-        // 追踪超时
+        // 追踪超时 → 取消激活，恢复普通村民（保留天生标签，下次敲钟可再激活）
         if (gameTime - startTime > CHASE_TIME) {
-            self.removeTag(TAG);
+            self.removeTag(ACTIVE_TAG);
+            self.getPersistentData().remove(NBT_START);
+            self.getPersistentData().remove(NBT_FUSE);
             return;
         }
 
@@ -93,7 +100,7 @@ public class VillagerBoomerMixin {
             return;
         }
 
-        // 追踪阶段
+        // 追玩家
         self.getBrain().setMemory(MemoryModuleType.WALK_TARGET,
                 new WalkTarget(player, 0.5F, 0));
     }

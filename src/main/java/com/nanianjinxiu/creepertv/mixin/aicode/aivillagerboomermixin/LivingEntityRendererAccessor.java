@@ -1,4 +1,4 @@
-package com.nanianjinxiu.creepertv.aicode.aivillagerboomer;
+package com.nanianjinxiu.creepertv.mixin.aicode.aivillagerboomermixin;
 
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;

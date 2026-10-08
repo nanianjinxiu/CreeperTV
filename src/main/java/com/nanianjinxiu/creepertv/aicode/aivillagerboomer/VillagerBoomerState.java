@@ -1,4 +1,4 @@
-package com.nanianjinxiu.creepertv.aicode.aivillagerboomer2;
+package com.nanianjinxiu.creepertv.aicode.aivillagerboomer;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

@@ -5,6 +5,9 @@ import com.nanianjinxiu.creepertv.client.model.PhanperModel;
 import com.nanianjinxiu.creepertv.client.model.VeperModel;
 import com.nanianjinxiu.creepertv.client.renderer.*;
 import com.nanianjinxiu.creepertv.entity.ModEntities;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.entity.MinecartRenderer;
+import net.minecraft.client.renderer.entity.TntMinecartRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,6 +23,7 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntities.VEPER.get(), VeperRenderer::new);
         event.registerEntityRenderer(ModEntities.IRON_GOLPER.get(), IronGolperRenderer::new);
         event.registerEntityRenderer(ModEntities.ENPER_MAN.get(), EnpermanRenderer::new);
+        event.registerEntityRenderer(ModEntities.MINECART_WITH_TNT.get(), TntMinecartRenderer::new);
     }
 
     @SubscribeEvent

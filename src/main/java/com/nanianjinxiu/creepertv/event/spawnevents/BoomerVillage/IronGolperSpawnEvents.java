@@ -1,4 +1,4 @@
-package com.nanianjinxiu.creepertv.spawnevents.BoomerVillage;
+package com.nanianjinxiu.creepertv.event.spawnevents.BoomerVillage;
 
 import com.nanianjinxiu.creepertv.CreeperTV;
 import com.nanianjinxiu.creepertv.entity.ModEntities;

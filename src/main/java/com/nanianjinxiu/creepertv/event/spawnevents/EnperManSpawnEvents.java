@@ -1,5 +1,6 @@
-package com.nanianjinxiu.creepertv.spawnevents;
+package com.nanianjinxiu.creepertv.event.spawnevents;
 
+import com.nanianjinxiu.creepertv.CreeperTV;
 import com.nanianjinxiu.creepertv.entity.ModEntities;
 import com.nanianjinxiu.creepertv.entity.animal.EnperMan;
 import net.minecraft.world.entity.Entity;
@@ -7,7 +8,9 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = CreeperTV.MODID)
 public class EnperManSpawnEvents {
     public static void onFinalizeSpawn(MobSpawnEvent.FinalizeSpawn event) {
         if (event.getLevel().isClientSide()) return;

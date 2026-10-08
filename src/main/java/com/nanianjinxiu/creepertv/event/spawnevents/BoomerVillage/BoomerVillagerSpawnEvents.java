@@ -1,4 +1,4 @@
-package com.nanianjinxiu.creepertv.spawnevents.BoomerVillage;
+package com.nanianjinxiu.creepertv.event.spawnevents.BoomerVillage;
 
 import com.nanianjinxiu.creepertv.CreeperTV;
 import net.minecraft.world.entity.npc.Villager;
@@ -12,8 +12,8 @@ public class BoomerVillagerSpawnEvents {
     public static void onFinalizeSpawn(MobSpawnEvent.FinalizeSpawn event) {
         if (event.getLevel().isClientSide()) return;
         if (!(event.getEntity() instanceof Villager)) return;
-        if (VillagerHash.isBoomerVillager(event.getEntity())){
-            event.getEntity().addTag("boomer");
+        if (VillagerHash.isBoomerVillager(event.getEntity())) {
+            event.getEntity().addTag("creepertv:natural_boomer");
         }
     }
 }

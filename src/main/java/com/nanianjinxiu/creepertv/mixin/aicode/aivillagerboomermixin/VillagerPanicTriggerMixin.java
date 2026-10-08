@@ -1,4 +1,4 @@
-package com.nanianjinxiu.creepertv.aicode.aivillagerboomer;
+package com.nanianjinxiu.creepertv.mixin.aicode.aivillagerboomermixin;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.behavior.VillagerPanicTrigger;

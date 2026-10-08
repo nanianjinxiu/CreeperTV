@@ -1,4 +1,4 @@
-package com.nanianjinxiu.creepertv.spawnevents.BoomerVillage;
+package com.nanianjinxiu.creepertv.event.spawnevents.BoomerVillage;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;

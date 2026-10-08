@@ -1,6 +1,6 @@
-package com.nanianjinxiu.creepertv.aicode.aivillagerboomer;
+package com.nanianjinxiu.creepertv.mixin.aicode.aivillagerboomermixin;
 
-import com.nanianjinxiu.creepertv.aicode.aivillagerboomer2.VillagerBoomerState;
+import com.nanianjinxiu.creepertv.aicode.aivillagerboomer.VillagerBoomerState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.Villager;
 import org.spongepowered.asm.mixin.Mixin;

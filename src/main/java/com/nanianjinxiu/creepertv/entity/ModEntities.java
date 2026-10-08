@@ -48,4 +48,10 @@ public class ModEntities {
                     .sized(0.6F, 2.9F)
                     .clientTrackingRange(8)
                     .build("creepertv:enper_man"));
+    public static final RegistryObject<EntityType<MinecartWithTNT>> MINECART_WITH_TNT =
+            ENTITIES.register("minecart_with_tnt", () -> EntityType.Builder
+                    .of(MinecartWithTNT::new, MobCategory.MISC)
+                    .sized(0.98F, 0.7F)
+                    .clientTrackingRange(8)
+                    .build("creepertv:minecart_with_tnt"));
 }
